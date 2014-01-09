@@ -1,0 +1,46 @@
+<beans xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security.xsd">
+
+<!-- 	<http pattern="/static/**" security="none" />  -->
+
+	<sec:http auto-config="true" use-expressions="true">
+		<sec:intercept-url pattern="/quote/add" access="hasRole('ROLE_USER')" />
+		<sec:intercept-url pattern="/rates/**" access="hasRole('ROLE_ADMIN')" />
+
+		<!-- TODO: deny access via direct URLs (/rates/delete/2) -->
+
+		<sec:form-login always-use-default-target="true" login-page="/login"
+			default-target-url="/" authentication-failure-url="/login?error=true" />
+
+		<sec:logout logout-url="/logout" logout-success-url="/login" />
+	</sec:http>
+
+	<bean id="daoAuthenticationProvider"
+		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<property name="userDetailsService" ref="userService" />
+	</bean>
+
+	<bean id="authenticationManager"
+		class="org.springframework.security.authentication.ProviderManager">
+		<property name="providers">
+			<list>
+				<ref local="daoAuthenticationProvider" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="passwordEncoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder">
+		<constructor-arg value="sAlT"/>
+	</bean>
+
+	<sec:authentication-manager>
+		<sec:authentication-provider user-service-ref="userService">
+        	<sec:password-encoder ref="passwordEncoder" />
+		</sec:authentication-provider>	
+	</sec:authentication-manager>
+
+</beans>
