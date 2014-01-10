@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+
+<project name="db-utils" basedir=".">
+	
+	<property file="build.properties" />
+	
+	<path id="master-classpath">
+			<fileset dir=".">
+				<include name="*.jar" />
+			</fileset>
+
+		</path>
+	
+	<!-- database scripts-->
+	<target name="create.tables">
+		<echo message="CREATE TABLES USING: ${db.driver} ${db.url}" />
+		<sql driver="${db.driver}" url="${db.url}" userid="${db.user}" password="${db.pw}" onerror="continue" src="create_tables.sql">
+			<classpath refid="master-classpath" />
+		</sql>
+	</target>
+
+	<target name="drop.tables">
+		<echo message="DROP TABLES USING: ${db.driver} ${db.url}" />
+		<sql driver="${db.driver}" url="${db.url}" userid="${db.user}" password="${db.pw}" onerror="continue">
+			<classpath refid="master-classpath" />
+
+	        DROP TABLE RATES;
+	        DROP TABLE USERS;
+			DROP TABLE SECURITY_ROLES;
+			DROP TABLE QUOTE;
+
+		</sql>
+	</target>
+	
+	<target name="print.data">
+		<echo message="PRINT DATA USING: ${db.driver} ${db.url}" />
+		<sql driver="${db.driver}" url="${db.url}" userid="${db.user}" password="${db.pw}" onerror="continue" print="true">
+			<classpath refid="master-classpath" />
+			SELECT * FROM RATES;
+	       	SELECT * FROM USERS;
+			SELECT * FROM SECURITY_ROLES;
+			SELECT * FROM QUOTE;
+	        </sql>
+	</target>
+
+
+	<target name="load.data">
+		<echo message="LOAD DATA USING: ${db.driver} ${db.url}" />
+		<sql driver="${db.driver}" url="${db.url}" userid="${db.user}" password="${db.pw}" onerror="continue" src="load_data.sql">
+			<classpath refid="master-classpath" />
+		</sql>
+	</target>
+
+	<target name="clear.data">
+		<echo message="CLEAR DATA USING: ${db.driver} ${db.url}" />
+		<sql driver="${db.driver}" url="${db.url}" userid="${db.user}" password="${db.pw}" onerror="continue">
+			<classpath refid="master-classpath" />
+
+	        DELETE FROM RATES;
+			DELETE FROM USERS;
+			DELETE FROM SECURITY_ROLES;
+			DELETE FROM QUOTE;
+
+	        </sql>
+	</target>
+
+		<target name="shutdown.db">
+		<echo message="SHUT DOWN DATABASE USING: ${db.driver} ${db.url}" />
+		<sql driver="${db.driver}" url="${db.url}" userid="${db.user}" password="${db.pw}" onerror="continue">
+			<classpath refid="master-classpath" />
+
+	        SHUTDOWN;
+
+	        </sql>
+	</target>
+
+	<target name="run.database">
+		<exec executable="server.bat" />
+	</target>	
+	<!-- End database scripts-->
+</project>
