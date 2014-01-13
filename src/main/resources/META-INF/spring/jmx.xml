@@ -11,7 +11,6 @@
         <property name="beans">
 	          <map>
 		        <entry key="bean:name=QuotesSettings" value-ref="quotesSettings"/>
-		        <entry key="bean:name=EhCache" value-ref="ehCacheMBean"/>
 		      </map>
         </property>
         <property name="namingStrategy" ref="namingStrategy" />

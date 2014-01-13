@@ -14,36 +14,37 @@ import javax.validation.constraints.Min;
 @Entity
 @Table(name = "RATES")
 public class Rate implements Serializable, Cloneable {
-	
-	private static final long serialVersionUID = -9112094630969045112L;
 
-	@Id
-	@Column(name = "ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	@Column(name = "RATE")
-	@Min(value = 0, message = "{validation.rate.min}")
-	@Max(value = 100, message = "{validation.rate.max}")
-	private int rate;
+    private static final long serialVersionUID = -9112094630969045112L;
 
-	public Long getId() {
-		return id;
-	}
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Column(name = "RATE")
+    @Min(value = 0, message = "{validation.rate.min}")
+    @Max(value = 100, message = "{validation.rate.max}")
+    private int rate;
 
-	public int getRate() {
-		return rate;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setRate(int rate) {
-		this.rate = rate;
-	}
-	
-	public String toString() {
-		return "Id: " + id + " Rate: " + rate;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getRate() {
+        return rate;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
+    }
+
+    @Override
+    public String toString() {
+        return "Id: " + id + " Rate: " + rate;
+    }
 }

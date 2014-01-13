@@ -28,7 +28,7 @@ http://www.springframework.org/schema/security/spring-security.xsd">
 		class="org.springframework.security.authentication.ProviderManager">
 		<property name="providers">
 			<list>
-				<ref local="daoAuthenticationProvider" />
+				<ref bean="daoAuthenticationProvider" />
 			</list>
 		</property>
 	</bean>

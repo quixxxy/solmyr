@@ -1,47 +1,43 @@
 package com.quixxxy.solmyr.dao.impl.hibernate;
 
-import java.io.Serializable;
-import java.util.List;
+import com.quixxxy.solmyr.dao.BaseDao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.quixxxy.solmyr.dao.BaseDao;
+import java.io.Serializable;
+import java.util.List;
 
-abstract class BaseDaoImpl<E, PK extends Serializable> implements
-		BaseDao<E, PK> {
+abstract class BaseDaoImpl<E, PK extends Serializable> implements BaseDao<E, PK> {
 
-	@Autowired
-	private SessionFactory session;
+    @Autowired
+    private SessionFactory session;
 
-	public void save(E obj) {
-		getSession().save(obj);
-	}
+    public void save(E obj) {
+        getSession().save(obj);
+    }
 
-	@SuppressWarnings("unchecked")
-	public E findById(PK id) {
-		return (E) getSession().get(getEntityClass(), id);
-	}
+    public E findById(PK id) {
+        return (E) getSession().get(getEntityClass(), id);
+    }
 
-	@SuppressWarnings("unchecked")
-	public E merge(E obj) {
-		 return (E) getSession().merge(obj);
-	}
+    public E merge(E obj) {
+        return (E) getSession().merge(obj);
+    }
 
-	public void delete(E obj) {
-		 getSession().delete(obj);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<E> findAll() {
-		return (List<E>) getSession().createQuery("from " + getEntityClass().getName()).list();
-	}
+    public void delete(E obj) {
+        getSession().delete(obj);
+    }
 
-	protected abstract Class<E> getEntityClass();
+    public List<E> findAll() {
+        return getSession().createQuery("from " + getEntityClass().getName()).list();
+    }
 
-	protected Session getSession() {
-		return session.getCurrentSession();
-	}
+    protected abstract Class<E> getEntityClass();
+
+    protected Session getSession() {
+        return session.getCurrentSession();
+    }
 
 }

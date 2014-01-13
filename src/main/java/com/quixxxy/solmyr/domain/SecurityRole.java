@@ -1,5 +1,7 @@
 package com.quixxxy.solmyr.domain;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -10,47 +12,44 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 @Entity
 @Table(name = "SECURITY_ROLES")
 public class SecurityRole implements Serializable, Cloneable {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	@Column(name = "ROLE_NAME")
-	private String roleName;
 
-	@ManyToOne
-	private User user;
-	
-	public String getRoleName() {
-		return roleName;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
+    @Column(name = "ROLE_NAME")
+    private String roleName;
 
-	public Long getId() {
-		return id;
-	}
+    @ManyToOne
+    private User user;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public String getRoleName() {
+        return roleName;
+    }
 
-	public User getUser() {
-		return user;
-	}
-	
-	public String toString() {
-		return new ToStringBuilder(this).
-				append("id").append(id).
-				append("roleName").append(roleName).
-				toString();
-	}
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("id").append(id).append("roleName").append(roleName)
+                .toString();
+    }
 
 }
