@@ -17,7 +17,7 @@ function checkAvailability() {
 }
 
 function voteQuote(quoteId, choice) {
-    $.getJSON(baseUrl() + "/quote/" + quoteId + "/" + choice, { }, function(currentVote) {
+    $.getJSON(baseUrl() + "/quote/" + quoteId + "/" + choice, {}, function(currentVote) {
     	if (!isNaN(currentVote)) {
     		$("#" + quoteId).text(currentVote);
         }
