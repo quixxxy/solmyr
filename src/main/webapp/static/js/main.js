@@ -17,9 +17,15 @@ function checkAvailability() {
 }
 
 function voteQuote(quoteId, choice) {
-    $.getJSON("/solmyr-cms/quote/" + quoteId + "/" + choice, { }, function(currentVote) {
+    $.getJSON(baseUrl() + "/quote/" + quoteId + "/" + choice, { }, function(currentVote) {
     	if (!isNaN(currentVote)) {
     		$("#" + quoteId).text(currentVote);
         }
     });
+}
+
+function baseUrl() {
+	var appName = location.pathname.split("/")[1];
+	appName == undefined ? appName = "" : appName = "/" + appName;
+	return location.protocol + "//" + location.host + appName;
 }

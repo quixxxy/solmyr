@@ -3,7 +3,7 @@
 <head>
 	<title><spring:message code="header.title" /></title>
 	<link rel="icon" type="image/ico" href="<spring:url value="/static/images/favicon.ico" />" />
-	<link rel="stylesheet" href="/solmyr-cms/<spring:theme code="css"/>" type="text/css"/>
+	<link rel="stylesheet" href="<c:url value="/" /><spring:theme code="css"/>" type="text/css"/>
 	<script type="text/javascript" src="<spring:url value="/static/js/jquery-1.7.2.js" />"></script>
 	<script type="text/javascript" src="<spring:url value="/static/js/main.js" />"></script>
 </head>
