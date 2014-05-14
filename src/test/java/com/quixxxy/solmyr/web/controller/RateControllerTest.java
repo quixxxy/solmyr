@@ -1,9 +1,9 @@
 package com.quixxxy.solmyr.web.controller;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import junit.framework.Assert;
 
 import org.easymock.EasyMock;
 import org.junit.After;
@@ -19,7 +19,7 @@ import com.quixxxy.solmyr.service.RateService;
 import com.quixxxy.solmyr.web.controller.RateController;
 
 @RunWith(PowerMockRunner.class)
-public class RateControllerTest extends Assert {
+public class RateControllerTest {
 
 	private RateService rateService;
 
