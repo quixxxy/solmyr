@@ -1,5 +1,7 @@
 package com.quixxxy.solmyr.util;
 
+import java.util.Arrays;
+
 public final class AvailabilityStatus {
 
 	public boolean isAvailable() {
@@ -32,7 +34,7 @@ public final class AvailabilityStatus {
 	
 	private AvailabilityStatus(boolean available, String[] suggestions) {
 		this.available = available;
-		this.suggestions = suggestions;
+		this.suggestions = Arrays.copyOf(suggestions, suggestions.length);
 	}
 	
 }
